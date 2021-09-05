@@ -24,13 +24,39 @@ const createNewBook = (req, res) => {
   })
 };
 
+
+
 const getAllBooks = (req, res) => {
   Book.find({}).then((res) => {
     res.json(result.data);
   });
 };
 
-app.get("/", getAllBooks);
+
+
+const getBook =(req,res) =>{
+  const bookd = req.params.book_id;
+  Book.findOne({_id:bookId}).then((result)=>{
+    res.json(result);
+  })
+}
+
+const deleteBook =(req,res) =>{
+  const bookd = req.params.book_id;
+  Book.deleteOne({_id:bookId},(err)=>{
+    if(err){
+      throw err;
+    }
+
+    res.json('Deleted')
+  })
+}
+
+
+app.get("/books", getAllBooks);
+app.post("/books", createNewBook);
+app.get("/books/:book_id", getBook);
+app.delete("/books/:book_id", deleteBook);
 
 const port = 5000;
 app.listen(port, () => {
