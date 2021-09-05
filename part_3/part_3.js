@@ -9,10 +9,24 @@ return 'NO' if the parentheses in the input string are not balanced,.
 
 */
 
-console.log('PART 4');
+console.log("PART 4");
 
-const isABalancedString = () => {
+const parantheses = {
+  "[": "]",
+  "(": ")",
+  "{": "}",
+};
+
+const isABalancedString = (string) => {
   // WRITE YOUR CODE BELOW THIS LINE
+  const arr = string.split();
+  for (let i = 0; i < arr.length / 2; i++) {
+    if (arr.pop() !== parantheses[arr.shift()]) {
+      return "NO";
+    }
+  }
+
+  return "Yes";
 };
 
 /*
